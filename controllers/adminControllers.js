@@ -61,7 +61,7 @@ const verifyAdminLogin=async(req,res)=>{
             req.session.admin_id=admin._id
             res.redirect('/admin/home')
         }else{
-            res.render("adminlogin",{message:"Incorrect Email or Password"})
+            res.render("adminLogin",{message:"Incorrect Email or Password"})
         }
     }catch(err){
         console.log(err.message);
