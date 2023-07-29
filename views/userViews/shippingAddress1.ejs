@@ -1,0 +1,99 @@
+<%- include("../partials/userHeader.ejs") %>
+<%- include("../partials/userNavs.ejs") %>
+                   
+                    <div class="col-lg-9 col-12 my-5 pt-5 ">
+                        <h3 class="text-center">My Addresses</h3>
+                        <div class="d-flex justify-content-end">
+                            <button type="button" onclick="window.location='/addAddress/<%= user._id %>'"
+                        class=" my-2 btn rounded-pill btn-outline-dark btn-md btn-block">
+                        Add New address
+                    </button>
+                        </div>
+                        
+                        <div class="row" data-bs-spy="scroll" data-bs-target="#navbar-example3"
+                            data-bs-smooth-scroll="true" class="scrollspy-example-2" tabindex="0">
+                        
+
+                            <% if (order && order.shippingAddress) { %>
+                                <% for(i=0;i<order.shippingAddress.length;i++){%>
+
+                                <div class="col-12 col-lg-4">
+                                    <div class=" card mt-3">
+<div class="card-header text-center bg-black text-white">ADDRESS <%= i+1  %></div>
+                                        <div class="card-body ">
+                                            <p class="card-text productName">
+                                                <%= order.shippingAddress[i].name %>,
+                                                <%= order.shippingAddress[i].houseName %>
+                                            </p>
+                                            <p class="card-text">
+                                                <%= order.shippingAddress[i].place %> PO, 
+                                            </p>
+                                            <p class="card-text">
+                                                <%= order.shippingAddress[i].city %>
+                                            </p>
+                                            <p class="card-text">
+                                                <%= order.shippingAddress[i].district %>
+                                            </p>
+                                            <p class="card-text">
+                                                <%= order.shippingAddress[i].state %>
+                                            </p>
+                                            <p class="card-text">
+                                                <%= order.shippingAddress[i].pinCode %>
+                                            </p>
+                                            <p class="card-text">
+                                                Phone: <%= order.shippingAddress[i].phoneNumber %>
+                                            </p>
+                                        </div>
+                                        <div class="d-flex justify-content-between m-3">
+                                            <a href="/updateShippingAddress/<%= user._id %>?addressIndex=<%= i %>" class="btn btn-outline-dark ">Edit</a>
+                                            <button  data-bs-toggle="modal" data-bs-target="#staticBackdrop<%= i %>" type="button" class="btn btn-outline-danger ">Delete</button>
+                                            <!-- Button trigger modal -->
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="staticBackdrop<%= i %>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Do you want to delete this Address?</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <form action="/deleteShippingAddress/<%= user._id %>?addressIndex=<%= i %>" method="post">
+          <button type="submit" class="btn btn-outline-danger">Yes</button>
+         </form>
+        </div>
+      </div>
+    </div>
+  </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <% } %>
+
+                            
+                                <% }else{ %>
+
+  <lottie-player src="https://assets1.lottiefiles.com/packages/lf20_OmS8YIjyKd.json" class="mx-auto"  background="transparent"  speed="1"  style="width: 300px; height: 300px;"  loop  autoplay></lottie-player>
+    <h3 class="text-center">You have not saved any Address </h3>
+
+                                <% } %>
+
+
+                       
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+            <%-include('../partials/userFooter.ejs') %>
+    </body>
+
+</html>

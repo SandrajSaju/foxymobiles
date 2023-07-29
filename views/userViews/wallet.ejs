@@ -1,0 +1,60 @@
+<%- include("../partials/userHeader.ejs") %>
+<%- include("../partials/userNavs.ejs") %>
+            
+<div class="col-9 mx-auto my-5 my-lg-auto ">   
+                <div class="row my-5 px-5">
+                    <div class="infos row mx-auto bg-white my-5">
+                        <div class="col-lg-6 col-12">
+                            <lottie-player src="https://assets4.lottiefiles.com/packages/lf20_sifvozg6.json" class="mx-auto  "  background="transparent"  speed="1"  style="width: 10rem; height: 10rem;"  loop  autoplay></lottie-player>
+                            <h5>Wallet Balance</h5>
+                            <h5 class=" fs-5 text-success">₹<%= wallet.balance %>
+                            </h5>
+                        </div>
+                        <div class="col-lg-6 col-12">
+                            <div class="card my-3 position-relative" >
+                                <div class="card-header z-3 position-sticky top-0 bg-black text-white text-center">
+                                    Wallet History
+                                   </div> 
+                                   <% if(wallet.credits.length> 0 ||wallet.debits.length>0 ){ %>
+                                        <% if(wallet.credits.length> 0 ) { %>
+                                            <h3 class="text-center text-success">Credits</h3>
+                                        <% wallet.credits.forEach((credit, index)=> {  %>  
+                                        <div class="card-body d-flex justify-content-between fw-bold text-success">
+                                            <p class="text-black"><%= credit.date.toLocaleDateString() %></p>
+                                            <p class=""><%= credit.date.toLocaleTimeString() %></p>
+                                            <p class=""><%= credit.productName %></p>
+                                            <p class=""><%= credit.quantity %></p>
+                                            <p class=""><%= credit.amount %></p>
+                                        </div>
+                                        <% }) %>
+                                        <% } %>
+                                        <% if (wallet.debits.length>0){ %>
+                                            <h3 class="text-center text-danger">Debits</h3>
+                                            <% wallet.debits.forEach((debit, index)=> {  %>  
+                                                <div class="card-body d-flex justify-content-between fw-bold text-danger">
+                                                    <p class="text-black"><%= debit.date.toLocaleDateString() %></p>
+                                                    <p class=""><%= debit.date.toLocaleTimeString() %></p>
+                                                    <p class="">Debited</p>
+                                                    <p class=""><%= debit.quantity %></p>
+                                                    <p class=""><%= debit.amount %></p>
+                                                </div>
+                                                <% }) %>
+                                                <% } %>
+                                        <% }else{%>
+                                            <lottie-player src="https://assets4.lottiefiles.com/packages/lf20_RiPXC5zxuO.json" class="mx-auto"  background="transparent"  speed="1"  style="width: 300px; height: 300px;"  loop  autoplay></lottie-player>
+                                            <h3>No History Available</h3>
+                                            
+                                            <% }  %>
+                                        </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            
+            
+            <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+            <%-include('../partials/userFooter.ejs') %>
+           
+
+</html>

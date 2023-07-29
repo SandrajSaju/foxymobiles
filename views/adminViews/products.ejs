@@ -1,0 +1,132 @@
+<%- include('../partials/adminHeader.ejs') %>
+<body class="admin-body">
+    <%- include('../partials/adminNavbar.ejs') %>
+    <%- include('../partials/adminSidebar.ejs') %>
+    <div class="d-flex  me-5 pt-5 ">
+        <a href="/admin/addProduct" class="btn btn-outline-dark rounded-pill ms-auto btn-lg mt-3">Add Product</a>
+    </div>
+
+    <section class="container">
+        <div class="row">
+            <div class="col-12 table-responsive">
+                <table id="datatable" class="table display table-overflow table-borderless table-hover">
+                    <thead>
+                        <tr>
+                            <th class="" scope="col">#</th>
+                            <th class="" scope="col">Product Name</th>
+                            <th class="" scope="col">Brand</th>
+                            <th class="" scope="col">Price</th>
+                            <th class="" scope="col">Offer</th>
+                            <th class="" scope="col">Category</th>
+                            <th class="" scope="col">Highlights</th>
+                            <th class="" scope="col">Colour</th>
+                            <th class="" scope="col">Total Stock</th>
+                            <th class="" scope="col">Image</th>
+                            <th class="" scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% if(products.length > 0){ %>
+                            <% var count = 1 %>
+                            <% products.forEach((item) => { %>
+                                <tr>
+                                    <th class="" scope="row">
+                                        <%= count++ %>
+                                    </th>
+                                    <td class="">
+                                        <%= item.productName %>
+                                    </td>
+                                    <td class="">
+                                        <%= item.brand %> 
+                                    </td>
+                                    <td class="">
+                                        ₹ <%= item.price %>
+                                    </td>
+                                    <td class="">
+                                        <% if(item.offer){ %>
+                                            <%= item.offer %>%
+                                        <% } %>
+                                    </td>
+                                    <td class="">
+                                        <%= item.category.categoryName %>
+                                    </td>
+                                    <td class="">
+                                    </td>
+                                    <td class="">
+                                        <%= item.color %>
+                                    </td>
+                                    <td class="">
+                                        <%= item.totalStock %> 
+                                    </td>
+                                    <td class="">
+                                        <img class="productImage" src="/<%= item.images[0] %>">
+                                    </td>
+                                    <td class="">
+                                        <div class="pt-auto d-flex">
+                                            <% if(item.isAvailable){ %>
+                                                <a href="/admin/editProduct/<%= item._id %>" class="btn btn-outline-info text-decoration-none me-2" id="block-button">Edit</a>
+                                                <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop1-<%= item._id %>" class="btn btn-danger btn-info text-decoration-none">Delete</button>
+                                            <% } else { %>
+                                                <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop2-<%= item._id %>" class="btn btn-danger btn-info text-decoration-none">Recover</button>
+                                            <% } %>
+                                        
+                                            <!-- Delete Product Modal -->
+                                            <div class="modal fade" id="staticBackdrop1-<%= item._id %>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdrop1Label" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h1 class="modal-title fs-5" id="staticBackdrop1Label">Do you want to delete this product?</h1>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <form action="/admin/deleteProduct/<%= item._id %>" method="post">
+                                                                <button type="submit" class="btn btn-danger" id="delete">Yes</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        
+                                            <!-- Recover Product Modal -->
+                                            <div class="modal fade" id="staticBackdrop2-<%= item._id %>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdrop2Label" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h1 class="modal-title fs-5" id="staticBackdrop2Label">Do you want to recover it from deleted Products?</h1>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <form action="/admin/recoverProduct/<%= item._id %>" method="post">
+                                                                <button type="submit" class="btn btn-danger" id="recover">Yes</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            <% }) %>
+                        <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+    <script src="/scripts/adminScript.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#datatable').DataTable();
+        });
+    </script>
+</body>
+</html>

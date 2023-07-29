@@ -1,0 +1,33 @@
+<%- include('../partials/adminHeader.ejs') %>
+<body class="admin-body">
+    <%- include('../partials/adminNavbar.ejs') %>
+    <%- include('../partials/adminSidebar.ejs') %>
+
+
+    <form action="/admin/salesReport" method="get">
+        <div class="container">
+            <h4 class="text-center"><strong>Sales Report</strong></h4>
+            <br>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <h5 class="text-primary"><strong>From:</strong></h5>
+                    <input style="border: 1px solid #ccc;border-radius: 4px;padding: 8px;font-size: 14px;" type="date"
+                        name="from" required>
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-success"
+                        style="border-radius: 20px;"><strong>Submit</strong></button>
+                </div>
+                <div>
+                    <h5 class="text-primary"><strong>To:</strong></h5>
+                    <input style="border: 1px solid #ccc;border-radius: 4px;padding: 8px;font-size: 14px;" type="date"
+                        name="to" required>
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+</body>
+
+</html>

@@ -1,0 +1,102 @@
+<%- include("../partials/userHeader.ejs") %>
+<%- include("../partials/userNavs.ejs") %>
+
+        <div class="col-lg-9 col-12 mt-5">
+
+                <div class="col-12 mb-4">
+                    <div class="card mb-4">
+                        <div class="card-header bg-black text-white text-center py-3">
+                            <h5 class="mb-0">New Shipping Details</h5>
+                        </div>
+                        <div class="card-body text-black">
+                            <form action="/shippingDetails/<%= user._id %>" method="post">
+                                <!-- 2 column grid layout with text inputs for the first and last names -->
+                                <div class="row mb-4">
+                                    <div id="liveAlertPlaceholder" >
+                                        <% if(typeof message !== "undefined"){ %>
+                                            <div class="alert alert-danger alert-dismissible w-50 d-block" role="alert">
+                                                  <div><%= message %></div>
+                                                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                                </div>
+                                            <% } %>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-outline">
+                                            <input type="text" id="name" value=""
+                                                name="name" class="form-control" required>
+                                            <label class="form-label"
+                                                for="name">Name</label>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-outline">
+                                            <input type="text" id="houseName" value=""
+                                                name="houseName" class="form-control" required>
+                                            <label class="form-label"
+                                                for="houseName">House Name</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Text input -->
+                                <div class="form-outline mb-4">
+                                    <input type="text" id="place" name="place" value=""
+                                        class="form-control" required>
+                                    <label class="form-label"
+                                        for="place">Place</label>
+                                </div>
+
+                                <!-- Email input -->
+                                <div class="form-outline mb-4">
+                                    <input type="text" id="city" name="city" value=""
+                                        class="form-control" required>
+                                    <label class="form-label"
+                                        for="city">City</label>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    <input type="text" id="district" name="district" value=""
+                                        class="form-control" required>
+                                    <label class="form-label"
+                                        for="district">District</label>
+                                </div>
+
+                                <!-- Number input -->
+                                <div class="form-outline mb-4">
+                                    <input type="text" id="state" name="state" value=""
+                                        class="form-control" required>
+                                    <label class="form-label"
+                                        for="state">State</label>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    <input type="text" id="pinCode" name="pinCode" value=""
+                                        class="form-control" required>
+                                    <label class="form-label"
+                                        for="pinCode">Pin Code</label>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    <input type="text" id="phoneNumber" name="phoneNumber" value=""
+                                        class="form-control" required>
+                                    <label class="form-label"
+                                        for="phoneNumber">Phone Number</label>
+                                </div>
+
+                                <button type="submit"
+                                    class="btn btn-outline-dark btn-lg btn m-auto ">
+                                    Add Address
+                                </button>
+                                <!-- Checkbox -->
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            
+        </div>
+    
+    <%-include('../partials/userFooter.ejs') %>
+</body>
+
+</html>

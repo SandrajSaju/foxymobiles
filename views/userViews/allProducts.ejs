@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Foxy Mobiles</title>
+	<link rel="stylesheet" href="/magiczoom/magiczoom.css">
+    <title>Home</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="/images/icons/favicon.png"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/fonts2/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/fonts2/iconic/css/material-design-iconic-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/fonts2/linearicons-v1.0.0/icon-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/vendor/animate/animate.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="/vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/vendor/select2/select2.min.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="/vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/vendor/slick/slick.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/vendor/MagnificPopup/magnific-popup.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/vendor/perfect-scrollbar/perfect-scrollbar.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/css3/util.css">
+	<link rel="stylesheet" type="text/css" href="/css3/main.css">
+<!--===============================================================================================-->
+</head>
+
+
+<body class="animsition">
+    <header>
+        <!-- Header desktop -->
+        <div class="container-menu-desktop">
+            <!-- Topbar -->
+            <div class="top-bar">
+                <div class="content-topbar flex-sb-m h-full container">
+                    <div class="left-top-bar">
+                        <strong>Foxy Mobiles</strong> - The One Place For All Gadgets
+                    </div>
+    
+                    <div class="right-top-bar flex-w h-full">
+                        <a href="#" class="flex-c-m trans-04 p-lr-25">
+                            Help & FAQs
+                        </a>
+    
+                        <a href="#" class="flex-c-m p-lr-10 trans-04">
+                            My Account
+                        </a>
+    
+                        <form style="margin-left: 10px;" action="/logout" class="flex-c-m">
+                            <button class="btn btn-danger">
+                                LogOut
+                            </button>
+                        </form>
+    
+                        <!-- <a href="#" class="flex-c-m trans-04 p-lr-25">
+                        EN
+                    </a>
+    
+                    <a href="#" class="flex-c-m trans-04 p-lr-25">
+                        USD
+                    </a> -->
+                    </div>
+                </div>
+            </div>
+    
+            <div class="wrap-menu-desktop">
+                <nav class="limiter-menu-desktop container">
+    
+                    <!-- Logo desktop -->
+                    <a style="color: black; font-size: 25px;" href="#" class="logo">
+                        <!-- <img src="images/icons/logo-01.png" alt="IMG-LOGO"> -->
+                        <strong>Foxy Mobiles</strong>
+                    </a>
+    
+                    <!-- Menu desktop -->
+                    <div class="menu-desktop">
+                        <ul class="main-menu">
+                            <li class="active-menu">
+                                <a href="/">Home</a>
+                            </li>
+    
+                            <li>
+                                <a href="/home/shop/<%= user._id %>">Shop</a>
+                            </li>
+    
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-link"><%= user.fullName %></a>
+                            <ul class="dropdown-menu">
+                              <li><a href="/userProfile/<%= user._id %>">Profile</a></li>
+                              <li><a href="/shippingDetails/<%= user._id %>">Address</a></li>
+                              <li><a href="/userOrders/<%= user._id  %>">Order History</a></li>
+                            </ul>
+                        </li> 
+    
+                            <li>
+                                <a href="">About</a>
+                            </li>
+    
+                            <li>
+                                <a href="">Contact</a>
+                            </li>
+    
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    
+        <!-- Header Mobile -->
+        <div class="wrap-header-mobile">
+            <!-- Logo moblie -->
+            <div class="logo-mobile">
+                <!-- <a href="/"><img src="images/icons/logo-01.png" alt="IMG-LOGO"></a> -->
+                <a style="color: black; font-size: 25px;" href="#" class="logo">
+                    <strong>Foxy Mobiles</strong>
+                </a>
+            </div>
+    
+            
+    
+            <!-- Button show menu -->
+            <div class="btn-show-menu-mobile hamburger hamburger--squeeze">
+                <span class="hamburger-box">
+                    <span class="hamburger-inner"></span>
+                </span>
+            </div>
+        </div>
+    
+    
+        <!-- Menu Mobile -->
+        <div class="menu-mobile">
+            <ul class="topbar-mobile">
+                <li>
+                    <div class="left-top-bar">
+                        <strong>Foxy Mobiles</strong> - Buy Premium Phones
+                    </div>
+                </li>
+    
+                <li>
+                    <div class="right-top-bar flex-w h-full">
+                        <a href="#" class="flex-c-m p-lr-10 trans-04">
+                            Help & FAQs
+                        </a>
+    
+                        <a href="#" class="flex-c-m p-lr-10 trans-04">
+                            My Account
+                        </a>
+    
+                        <form style="margin-left: 10px;" action="/logout" class="flex-c-m">
+                            <button class="btn btn-danger">
+                                LogOut
+                            </button>
+                        </form>
+    
+                        <!-- <a href="#" class="flex-c-m p-lr-10 trans-04">
+                        EN
+                    </a>
+    
+                    <a href="#" class="flex-c-m p-lr-10 trans-04">
+                        USD
+                    </a> -->
+                    </div>
+                </li>
+            </ul>
+    
+            <ul class="main-menu-m">
+                <li>
+                    <a href="/">Home</a>
+                    <!-- <span class="arrow-main-menu-m">
+                    <i class="fa fa-angle-right" aria-hidden="true"></i>
+                </span> -->
+                </li>
+    
+                <li>
+                    <a href="/allProducts/<%= user._id %>">Shop</a>
+                </li>
+    
+                <li>
+                    <a href=""><%= user.fullName %></a>
+                </li>
+    
+                <!-- <li>
+                <a href="shoping-cart.html" class="label1 rs1" data-label1="hot">Features</a>
+            </li> -->
+    
+                <!-- <li>
+                <a href="blog.html">Blog</a>
+            </li> -->
+    
+                <li>
+                    <a href="">About</a>
+                </li>
+    
+                <li>
+                    <a href="">Contact</a>
+                </li>
+            </ul>
+        </div>
+    
+        <!-- Modal Search -->
+        <div class="modal-search-header flex-c-m trans-04 js-hide-modal-search">
+            <div class="container-search-header">
+                <button class="flex-c-m btn-hide-modal-search trans-04 js-hide-modal-search">
+                    <img src="images/icons/icon-close2.png" alt="CLOSE">
+                </button>
+    
+                <form class="wrap-search-header flex-w p-l-15">
+                    <button class="flex-c-m trans-04">
+                        <i class="zmdi zmdi-search"></i>
+                    </button>
+                    <input class="plh3" type="text" name="search" placeholder="Search...">
+                </form>
+            </div>
+        </div>
+    </header>
+    
+    <style>
+        .dropdown {
+          position: relative;
+          display: inline-block;
+        }
+      
+        .dropdown .dropdown-menu {
+          display: none;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          background-color: #f9f9f9;
+          padding: 10px;
+          list-style-type: none;
+          margin: 0;
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+      
+        .dropdown:hover .dropdown-menu {
+          display: block;
+        }
+      
+        .dropdown-menu li {
+          margin-bottom: 5px;
+        }
+      
+        .dropdown-menu a {
+          display: block;
+          padding: 5px 10px;
+          color: #333;
+          text-decoration: none;
+        }
+      
+        .dropdown-menu a:hover {
+          background-color: #ddd;
+        }
+      </style>
+
+<br><br>
+
+            <div class="bg0 m-t-23 p-b-140">
+                <div class="container">
+                    <div class="flex-w flex-sb-m p-b-52">
+
+                        <div class="category-info">
+                            <h2>All Products</h2>
+                            <br>
+                            
+                        </div>
+
+                        <div class="flex-w flex-c-m m-tb-10">
+                            <div
+                                class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4 js-show-search">
+                                <i class="icon-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-search"></i>
+                                <i class="icon-close-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+                                Search
+                            </div>
+                        </div>
+
+                        <!-- Search product -->
+                        <div class="dis-none panel-search w-full p-t-10 p-b-15">
+                            <div class="bor8 dis-flex p-l-15">
+                                <button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
+                                    <i class="zmdi zmdi-search"></i>
+                                </button>
+
+                                <input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search-product"
+                                    placeholder="Search">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row isotope-grid">
+                        <% products.forEach((product)=>{%>
+                            <% %>
+                                <div
+                                    class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item">
+                                    <!-- Block2 -->
+                                    <a href="/productDetails/<%= user._id %>/<%= product._id %>" class="prod-img">
+                                     <div class="block2">
+                                        <div style="background-image: url('/images/backdrop.jpg'); height: 300px; display: flex; justify-content: center; align-items: center;"
+                                            class="block2-pic hov-img0">
+
+                                            <img style="max-height: 300px;"
+                                                src="/<%= product.images[0] %>"
+                                                alt="<%= product.productName %>">
+                                           
+                                        </div>
+                                        <div class="block2-txt flex-w flex-t p-t-14">
+                                            <div class="block2-txt-child1 flex-col-l ">
+                                                
+                                                    <%= product.productName %>
+
+                                                    <% if(product.totalStock <=5 && product.totalStock >= 1){
+                                                        %>
+                                                        <p class="text-danger"><strong>Only <%= product.totalStock %>
+                                                                    Availble</strong></p>
+                                                        <% }else if(product.totalStock===0){ %>
+                                                            <h5 class="text-danger"><strong>Out of Quantity</strong></h5>
+                                                            <% } %>
+
+                                                            
+                                                <span class="stext-105 cl3">
+                                                    
+                                                    Rs:<%= product.price %>
+                                                </span>
+
+                                                            
+                                                                <% if (offers && offers.length> 0) {
+                                                                    offers.forEach((offer) => {
+                                                                    if (offer.isAvailable) { %>
+                                                                    <% if
+                                                                        (offer.category.toString()===product.category._id.toString())
+                                                                        { %>
+                                                                        <h5 class="text-success"><strong>Offer
+                                                                                Available</strong></h5>
+                                                                        <p class="text-primary">
+                                                                            <%= offer.offerDiscount %>% off
+                                                                        </p>
+                                                                        <h5><strong>Offer Price: ₹</strong><strong
+                                                                                class="text-success">
+                                                                                <%= Math.round(product.price -
+                                                                                    (product.price *
+                                                                                    (offer.offerDiscount/100))) %>.00/-
+                                                                            </strong></h5>
+                                                                        <% } %>
+                                                                            <% } }); } %>
+                                                        
+                                                       
+                                            </div>
+
+                                           
+                                        </div>
+                                    </div>
+                                </a>
+                                </div>
+                                <%})%>
+                                    <% %>
+
+                    </div>
+                </div>
+            </div>
+
+            <footer class="bg3 p-t-75 p-b-32">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6 col-lg-3 p-b-50">
+                            <h4 class="stext-301 cl0 p-b-30">
+                                Categories
+                            </h4>
+
+                            <ul>
+                                <li class="p-b-10">
+                                    <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+                                        Smart Phones
+                                    </a>
+                                </li>
+
+                                <li class="p-b-10">
+                                    <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+                                        Laptops
+                                    </a>
+                                </li>
+
+                                <li class="p-b-10">
+                                    <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+                                        Smart Watches
+                                    </a>
+                                </li>
+
+                                <li class="p-b-10">
+                                    <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+                                        Audio Products
+                                    </a>
+                                </li>
+
+                                <li class="p-b-10">
+                                    <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+                                        Gaming Consoles
+                                    </a>
+                                </li>
+
+                                <li class="p-b-10">
+                                    <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+                                        Cameras
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="col-sm-6 col-lg-3 p-b-50">
+                            <h4 class="stext-301 cl0 p-b-30">
+                                Help
+                            </h4>
+
+                            <ul>
+                                <li class="p-b-10">
+                                    <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+                                        Track Order
+                                    </a>
+                                </li>
+
+                                <li class="p-b-10">
+                                    <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+                                        Returns
+                                    </a>
+                                </li>
+
+                                <li class="p-b-10">
+                                    <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+                                        Shipping
+                                    </a>
+                                </li>
+
+                                <li class="p-b-10">
+                                    <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+                                        FAQs
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </div>
+
+                        <div class="col-sm-6 col-lg-3 p-b-50">
+                            <h4 class="stext-301 cl0 p-b-30">
+                                GET IN TOUCH
+                            </h4>
+
+                            <p class="stext-107 cl7 size-201">
+                                Any questions? Let us know in store at 8th floor, 379 Hudson St, New York, NY 10018 or
+                                call
+                                us on (+1) 96 716 6879
+                            </p>
+
+                            <div class="p-t-27">
+                                <a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
+                                    <i class="fa fa-facebook"></i>
+                                </a>
+
+                                <a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
+                                    <i class="fa fa-instagram"></i>
+                                </a>
+
+                                <a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
+                                    <i class="fa fa-pinterest-p"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 col-lg-3 p-b-50">
+                            <h4 class="stext-301 cl0 p-b-30">
+                                Newsletter
+                            </h4>
+
+                            <form>
+                                <div class="wrap-input1 w-full p-b-4">
+                                    <input class="input1 bg-none plh1 stext-107 cl7" type="text" name="email"
+                                        placeholder="email@example.com">
+                                    <div class="focus-input1 trans-04"></div>
+                                </div>
+
+                                <div class="p-t-18">
+                                    <button class="flex-c-m stext-101 cl0 size-103 bg1 bor1 hov-btn2 p-lr-15 trans-04">
+                                        Subscribe
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="p-t-40">
+                        <div class="flex-c-m flex-w p-b-18">
+                            <a href="#" class="m-all-1">
+                                <img src="/images/icons/icon-pay-01.png" alt="ICON-PAY">
+                            </a>
+
+                            <a href="#" class="m-all-1">
+                                <img src="/images/icons/icon-pay-02.png" alt="ICON-PAY">
+                            </a>
+
+                            <a href="#" class="m-all-1">
+                                <img src="/images/icons/icon-pay-03.png" alt="ICON-PAY">
+                            </a>
+
+                            <a href="#" class="m-all-1">
+                                <img src="/images/icons/icon-pay-04.png" alt="ICON-PAY">
+                            </a>
+
+                            <a href="#" class="m-all-1">
+                                <img src="/images/icons/icon-pay-05.png" alt="ICON-PAY">
+                            </a>
+                        </div>
+
+                        <p class="stext-107 cl6 txt-center">
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            Copyright &copy;
+                            <script>document.write(new Date().getFullYear());</script> All rights reserved | Made with
+                            <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="" target="_blank">Sreehari</a>
+                            &amp; distributed by <a href="" target="_blank">ThemeWagon</a>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+
+                        </p>
+                    </div>
+                </div>
+            </footer>
+
+            <!--===============================================================================================-->
+<script src="/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+<script src="/vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+<script src="/vendor/bootstrap/js/popper.js"></script>
+<script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+<script src="/vendor/select2/select2.min.js"></script>
+<script>
+    $(".js-select2").each(function(){
+        $(this).select2({
+            minimumResultsForSearch: 20,
+            dropdownParent: $(this).next('.dropDownSelect2')
+        });
+    })
+</script>
+<!--===============================================================================================-->
+<script src="/vendor/daterangepicker/moment.min.js"></script>
+<script src="/vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+<script src="/vendor/slick/slick.min.js"></script>
+<script src="/js2/slick-custom.js"></script>
+<!--===============================================================================================-->
+<script src="/vendor/parallax100/parallax100.js"></script>
+<script>
+    $('.parallax100').parallax100();
+</script>
+<!--===============================================================================================-->
+<script src="/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
+<script>
+    $('.gallery-lb').each(function() { // the containers for all your galleries
+        $(this).magnificPopup({
+            delegate: 'a', // the selector for gallery item
+            type: 'image',
+            gallery: {
+                enabled:true
+            },
+            mainClass: 'mfp-fade'
+        });
+    });
+</script>
+<!--===============================================================================================-->
+<script src="/vendor/isotope/isotope.pkgd.min.js"></script>
+<!--===============================================================================================-->
+<script src="/vendor/sweetalert/sweetalert.min.js"></script>
+<script>
+    $('.js-addwish-b2').on('click', function(e){
+        e.preventDefault();
+    });
+
+    $('.js-addwish-b2').each(function(){
+        var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
+        $(this).on('click', function(){
+            swal(nameProduct, "is added to wishlist !", "success");
+
+            $(this).addClass('js-addedwish-b2');
+            $(this).off('click');
+        });
+    });
+
+    $('.js-addwish-detail').each(function(){
+        var nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
+
+        $(this).on('click', function(){
+            swal(nameProduct, "is added to wishlist !", "success");
+
+            $(this).addClass('js-addedwish-detail');
+            $(this).off('click');
+        });
+    });
+
+    /*---------------------------------------------*/
+
+    $('.js-addcart-detail').each(function(){
+        var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
+        $(this).on('click', function(){
+            swal(nameProduct, "is added to cart !", "success");
+        });
+    });
+
+</script>
+<!--===============================================================================================-->
+<script src="/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+<script>
+    $('.js-pscroll').each(function(){
+        $(this).css('position','relative');
+        $(this).css('overflow','hidden');
+        var ps = new PerfectScrollbar(this, {
+            wheelSpeed: 1,
+            scrollingThreshold: 1000,
+            wheelPropagation: false,
+        });
+
+        $(window).on('resize', function(){
+            ps.update();
+        })
+    });
+</script>
+<!--===============================================================================================-->
+<script src="/js2/main.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js" integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous"></script>
+<script src="/magiczoom/magiczoom.js"></script>
+</body>
+</html>           

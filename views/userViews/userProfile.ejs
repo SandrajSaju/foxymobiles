@@ -1,0 +1,39 @@
+<%- include("../partials/userHeader.ejs") %>
+<%- include("../partials/userNavs.ejs") %>
+    
+              <div class="col-9 mx-auto my-5 my-lg-auto ">
+                <div class="ms-start"> 
+                <div class="infos row  mb-5  bg-white border border-0 " style="vertical-align: middle;"> 
+                 <a href="/wallet/<%= user._id %>"class="text-decoration-none text-black col-6" >
+                    <lottie-player src="https://assets4.lottiefiles.com/packages/lf20_sifvozg6.json" class="mx-auto  "  background="transparent"  speed="1"  style="width: 50px; height: 50px;"  loop  autoplay></lottie-player><h6 class="text-center">My wallet </h6> <h5 class=" fs-5 text-success">₹<%= user.wallet %></h5>
+                   </a>
+                   <a href="/userOrders/<%= user._id %>"class="text-decoration-none text-black col-6"  >
+                    <img src="https://img.icons8.com/external-kmg-design-flat-kmg-design/50/null/external-logistics-shipping-delivery-kmg-design-flat-kmg-design-2.png"><br><h6>Total Orders</h6><h5 class=" fs-5"><%= user.totalOrders %></h5>
+                   </a>
+                  </div>
+                </div>
+                <div class="row  mx-auto">
+                  <div class=" border  mx-auto border-2 ">
+                    <div class=" py-2 "><h5 class="me-2">Name</h5>
+                 <p    ><%= user.fullName %></p>
+                  </p>
+                  <div class=" py-2 "><h5 class="me-2">Phone</h5>
+                    <p    ><%= user.phoneNumber %></p>
+                  </div>
+                  <div class=" py-2 "><h5 class="me-2">Email</h5>
+                  <p    ><%= user.email %></p>
+                  </div>
+                    <a href="/userEdit/<%= user._id  %>" class="text-decoration-none  btn btn-dark my-3 w-100">Edit</a >
+                  </div>
+                  
+                
+                </div>
+              </div>
+            </div>
+    
+          </div>
+          </div>
+          <%-include('../partials/userFooter.ejs') %>
+          <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
+        </html>

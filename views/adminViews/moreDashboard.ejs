@@ -1,0 +1,275 @@
+<%- include('../partials/adminHeader.ejs')%>
+
+    <body class="admin-body">
+        <%- include('../partials/adminNavbar.ejs') %>
+            <%- include('../partials/adminSidebar.ejs') %>
+
+
+                <div class="container">
+                    <div class="d-flex justify-content-between">
+                        <div class="card border-0 shadow mb-3" style="flex-basis: 18rem; width: 18rem;">
+                            <div class="card-header text-center">
+                                <h5>Total</h5>
+                            </div>
+                            <div class="card-body text-danger text-center">
+                                <h5 class="card-title"><strong>USERS</strong></h5>
+                                <p class="card-text">
+                                <h1>
+                                    <%= userCount %>
+                                </h1>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="card border-0 shadow mb-3" style="flex-basis: 18rem; width: 18rem;">
+                            <div class="card-header text-center">
+                                <h5>Total</h5>
+                            </div>
+                            <div class="card-body text-success text-center">
+                                <h5 class="card-title"><strong>REVENUE</strong></h5>
+                                <p class="card-text">
+                                <h1>
+                                    ₹<%= totalRevenue.toFixed(2) %>/-
+                                </h1>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="card border-0 shadow mb-3" style="flex-basis: 18rem; width: 18rem;">
+                            <div class="card-header text-center">
+                                <h5>Total</h5>
+                            </div>
+                            <div class="card-body text-center">
+                                <h5 class="card-title"><strong>ACTIVE USERS</strong></h5>
+                                <p class="card-text">
+                                <h1>
+                                    <%= activeUsers %>
+                                </h1>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="card border-0 shadow mb-3" style="flex-basis: 18rem; width: 18rem;">
+                            <div class="card-header text-center">
+                                <h5>Total</h5>
+                            </div>
+                            <div class="card-body text-center" style="color: rgb(182, 132, 67);">
+                                <h5 class="card-title"><strong>TRANSACTIONS</strong></h5>
+                                <table class="container" style="color: rgb(229, 160, 33);">
+                                    <tr>
+                                        <th style="padding-right: 20px;">Method</th>
+                                        <th style="padding-left: 20px;">Revenue</th>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>COD</strong></td>
+                                        <td><strong>₹<%= codRevenue.toFixed(2) %>/-</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>RazorPay</strong></td>
+                                        <td><strong>₹<%= razor_payRevenue.toFixed(2) %>/-</strong></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+                <br>
+                <br>
+
+                <div style="display: flex; justify-content: space-evenly;">
+                    <div class="card border-0 shadow" style="width: 45%;">
+                        <div class="card-body">
+                            <canvas id="myChart" style="width:100%;max-width:600px; height: 600px;"></canvas>
+                        </div>
+                    </div>
+                    <div class="card border-0 shadow" style="width: 45%; align-items: center;">
+                        <div class="card-body" style="align-items: center;">
+                            <div id="myChart1" style="width:100%;max-width:450px;height: 450px;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <br><br><br>
+
+                <div style="display: flex; justify-content: center; align-items: center;">
+                    <div class="container" style="padding: 0;">
+                        <div class="card border-0 shadow">
+                            <div class="card-body" style="display: flex; justify-content: center;">
+                                <canvas id="myChart2" style="max-width: 1000px; height: 450px;"></canvas>
+                                <div>
+                                    <select id="chartDropdown">
+                                        <option value="week">Week</option>
+                                        <option value="month">Month</option>
+                                        <option value="year">Year</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <br>
+                <form action="/admin/salesReport" method="get">
+                    <div class="container">
+                        <h4 class="text-center"><strong>Sales Report</strong></h4>
+                        <br>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <h5 class="text-primary"><strong>From:</strong></h5>
+                                <input style="border: 1px solid #ccc;border-radius: 4px;padding: 8px;font-size: 14px;"
+                                    type="date" name="from" required>
+                            </div>
+                            <div>
+                                <button type="submit" class="btn btn-success"
+                                    style="border-radius: 20px;"><strong>Submit</strong></button>
+                            </div>
+                            <div>
+                                <h5 class="text-primary"><strong>To:</strong></h5>
+                                <input style="border: 1px solid #ccc;border-radius: 4px;padding: 8px;font-size: 14px;"
+                                    type="date" name="to" required>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+
+                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+
+
+                <script>
+                    let xValues = []
+                        <% categoryData.forEach(category => { %>
+                            xValues.push("<%= category.categoryName %>")
+                            <% }) %>
+
+            var yValues = [<%= categorySales %>]
+                    var barColors = [
+                        "#b91d47",
+                        "#00aba9",
+                        "#2b5797",
+                        "#e8c3b9",
+                        "#1e7145",
+                        "#fcba03",
+                        "#CBD329",
+                        "#FE8F04",
+                        "#00FF72",
+                        "#FF0072",
+                        "#E919DF",
+                        "#DEFC06"
+                    ];
+                    new Chart("myChart", {
+                        type: "pie",
+                        data: {
+                            labels: xValues,
+                            datasets: [{
+                                backgroundColor: barColors,
+                                data: yValues
+                            }]
+                        },
+                        options: {
+                            title: {
+                                display: true,
+                                text: "Category Wise Revenue"
+                            }
+                        }
+                    });
+                </script>
+
+
+<script>
+    google.charts.load('current', { packages: ['corechart'] });
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+        const data = google.visualization.arrayToDataTable([
+            ['Category', 'Orders'],
+    <% categoryData.forEach(category => {
+                let orderCount = 0;
+    %>
+        <% orderData.forEach(order => {
+                    order.purchasedProducts.forEach(product => {
+                        if (product.product.category.toString() === category._id.toString()) {
+                            orderCount += product.quantity;
+                        }
+                    });
+                });
+        %>
+                    ['<%= category.categoryName %>', <%= orderCount %>],
+    <% }); %>
+]);
+
+        const options = {
+            title: 'Total Orders in Each Category',
+            colors: ['purple']
+        };
+
+        const chart = new google.visualization.BarChart(document.getElementById('myChart1'));
+        chart.draw(data, options);
+    }
+</script>
+
+
+                
+                <script>
+                    const week = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+                    const month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+                    const year = ["2021", "2022", "2023", "2024", "2025", "2026", "2027"];
+
+                    let xValues2 = week;
+                    let yValues2 = [<%= daySales %>];
+
+                    const chartDropdown = document.getElementById('chartDropdown');
+                    chartDropdown.addEventListener('change', function () {
+                        const selectedOption = this.value;
+                        if (selectedOption === 'week') {
+                            xValues2 = week;
+                            yValues2 = [<%= daySales %>];
+                        } else if (selectedOption === 'month') {
+                            xValues2 = month;
+                            yValues2 = [<%= monthSales %>];
+                        } else if (selectedOption === 'year') {
+                            xValues2 = year;
+                            yValues2 = [<%= yearSales %>];
+                        }
+
+                        updateChart();
+                    });
+
+                    function updateChart() {
+                        const chart = new Chart("myChart2", {
+                            type: "line",
+                            data: {
+                                labels: xValues2,
+                                datasets: [{
+                                    fill: true,
+                                    lineTension: 0,
+                                    backgroundColor: "rgba(19, 159, 175, 0.3)",
+                                    borderColor: "rgba(59, 159, 175, 1.0)",
+                                    data: yValues2
+                                }]
+                            },
+                            options: {
+                                legend: { display: false },
+                                scales: {
+                                    yAxes: [{ ticks: { min: 0, max: 100 } }],
+                                }
+                            }
+                        });
+                    }
+
+                    updateChart();
+                </script>
+                <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+                <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+                <script src="/scripts/adminScript.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+                    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+                    crossorigin="anonymous"></script>
+
+    </body>
+
+    </html>

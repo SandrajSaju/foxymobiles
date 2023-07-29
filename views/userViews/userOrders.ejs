@@ -1,0 +1,203 @@
+<%- include("../partials/userHeader.ejs") %>
+<%- include("../partials/userNavs.ejs") %>
+
+<div class="col-12 orders position-relative col-lg-9 mb-5 mb-lg-0">
+  <h2 class="text-center z-3 position-sticky top-0 my-5">My Orders</h2>
+  <% if (order && order.purchasedProducts.length > 0) { %>
+  <div class="card my-3">
+    <div class="card-body">
+      <div class="d-flex ">
+
+      </div>
+
+      <table class="table table-borderless">
+        <tbody>
+          <tr>
+            <th>Product Name</th>
+            <th>Product Image</th>
+
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Address & Date</th>
+            <th>PaymentMethod</th>
+            <th>Status</th>
+            <th class="text-end">Action</th>
+          </tr>
+          <% let currentDate = null %>
+          <% for (i = order.purchasedProducts.length - 1; i >= 0; i--) { %>
+          <% const currentOrder = order.purchasedProducts[i] %>
+          <% const orderDate = currentOrder.date.toLocaleDateString() + "  " + currentOrder.date.toLocaleTimeString() %>
+          <% if (orderDate !== currentDate) { %>
+          <% currentDate = orderDate %>
+          <% const displayDate = currentOrder.date.toLocaleDateString() %>
+          <tr>
+            <td colspan="7">
+              <strong><%= displayDate %></strong>
+            </td>
+            <td class="text-end">
+              <form action="/userInvoice/<%= order.cart %>/<%= order.purchasedProducts[i].date %>" method="get">
+                <button type="submit" class="btn btn-outline-success">Download Invoice</button>
+              </form>
+            </td>
+          </tr>
+          <% } %>
+          <tr>
+            <td>
+              <h6 class="smallmb-0">
+                <%= currentOrder.product.productName %>
+              </h6>
+            </td>
+            <td>
+              <div class="d-flex mb-2">
+                <div class="flex-shrink-0">
+                  <img src="/<%= currentOrder.product.images[0] %>" alt="" width="35" class="img-fluid">
+                </div>
+              </div>
+            </td>
+
+            <td>
+              <%= currentOrder.quantity %>
+            </td>
+            <td>
+              ₹ <%= currentOrder.product.price * currentOrder.quantity %>.00
+            </td>
+            <td>
+              <strong><%= currentOrder.address.name %></strong>
+              <br>
+              <%= currentOrder.address.houseName %>,
+              <%= currentOrder.address.place %> PO,
+              <%= currentOrder.address.city %>
+              <br>
+              <strong>Pin: <%= currentOrder.address.pinCode %></strong>
+              <br>
+              <strong><%= currentOrder.date.toLocaleTimeString() %></strong>
+            </td>
+            <td>
+              <%= currentOrder.paymentMethod %>
+            </td>
+            <td>
+              <%= currentOrder.status %>
+            </td>
+            <td class="text-end">
+              <% if (order.purchasedProducts[i].status === 'Cancelled' || order.purchasedProducts[i].status === 'Returned') { %>
+
+              <% } else if (order.purchasedProducts[i].status === 'Delivered') { %>
+
+              <form action="/returnOrder/<%= order._id %>/<%= currentOrder.product._id %>/<%= user._id %>/<%= currentOrder._id %>"
+                method="post">
+                <button type="submit" class="btn btn-outline-success">Return</button>
+              </form>
+              <% } else { %>
+
+              <form action="/cancelOrder/<%= order._id %>/<%= currentOrder.product._id %>/<%= user._id %>/<%= currentOrder._id %>"
+                method="post">
+                <button type="submit" class="btn btn-outline-danger">Cancel Order</button>
+              </form>
+              <% } %>
+            </td>
+          </tr>
+          <% } %>
+
+        </tbody>
+
+
+
+        <tfoot>
+        </tfoot>
+      </table>
+
+    </div>
+
+  </div>
+
+
+
+  <% } else{ %>
+  <lottie-player src="https://assets4.lottiefiles.com/packages/lf20_vsaoi7iz.json" class="mx-auto" background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay></lottie-player>
+  <h3 class="text-center">No order History Available</h3>
+  <h4 class="text-center">Buy something to make me happy</h4>
+  <% } %>
+
+
+</div>
+</div>
+
+</div>
+
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+<footer class="footer bg-black text-white">
+  <div class="footer__container">
+    <div class="footer__top">
+      <div class="company__info">
+        <div class="logo d-flex align-items-center py-auto">
+          <p class="x">F</p>
+          <p class="time">oxy</p><br>
+          <span class="text-white fs-6">Mobiles</span>
+        </div>
+        <div class="share-button">
+
+          <span></i>Our Social media</span>
+
+          <a><i class="fab fa-facebook-f"></i></a>
+
+          <a><i class="fab fa-twitter"></i></a>
+
+          <a><i class="fab fa-instagram"></i></a>
+
+
+        </div>
+        <span class="copyright">&copy;2023 ZodiacWatches All rights reserved.</span>
+      </div>
+
+      <div>
+        <h6 class="footer__title">About</h6>
+        <ul class="footer__list">
+          <li class="footer__list-item">
+            <a href="" class="footer__list-link">Company</a>
+          </li>
+          <li class="footer__list-item">
+            <a href="" class="footer__list-link">About us</a>
+          </li>
+
+          <li class="footer__list-item">
+            <a href="" class="footer__list-link">Sitemap</a>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <h6 class="footer__title">Help</h6>
+        <ul class="footer__list">
+          <li class="footer__list-item">
+            <a href="" class="footer__list-link">Payments</a>
+          </li>
+          <li class="footer__list-item">
+            <a href="" class="footer__list-link">Shipping</a>
+          </li>
+          <li class="footer__list-item">
+            <a href="" class="footer__list-link">Cancellation</a>
+          </li>
+          <li class="footer__list-item">
+            <a href="" class="footer__list-link">FAQ</a>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <h6 class="footer__title">Mail US</h6>
+        <ul class="footer__list">
+          <P class="mail">zodiacWatches@gmail<br>
+            Dotspace Bussiness Park, <br>
+            Near AL Uthuman School,Kazhakkoottam, <br>
+            Thiruvananthapuram,Kerala 695585</P>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+<script src="../scripts/userScript.js"></script>
+
+</body>
+
+</html>

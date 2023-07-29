@@ -1,0 +1,98 @@
+<body>
+    <nav class="navbar logo   fixed-top " id="">
+        <a class="navbar-brand " href="/">
+            <div class=" ms-5 d-flex align-items-center py-auto">
+                <p class="x">F</p> 
+                <p class="time">oxy</p><br>
+             <span class="text-white fs-6">Mobiles</span>   
+            </div>
+           
+        </a>
+        <input type="checkbox" id="toggler" />
+        <label for="toggler"><i class="ri-menu-line me-4 mb-5 text-secondary"></i></label>
+        <div class="menu me-3 ">
+            <ul class="list">
+                <li><a href="/">Home</a></li>
+                 <li><a href="/allProducts/<%= user._id %>">Shop</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a  href="/shoppingCart/<%= cart._id %>">Cart </a></li>
+           
+       
+          <li>  <a class="nav-link dropdown-toggle href="#" role="button"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                Account
+            </a>
+            <div class="dropdown-menu dropdown-menu-end" data-bs-theme="dark">
+                <a class="dropdown-item" href="/userProfile/<%= user._id  %>">My Account</a>
+                <div class="dropdown-divider"></div>
+                <button type="button" class="btn btn-danger dropdown-item" data-bs-toggle="modal"
+                    data-bs-target="#staticBackdrop">
+                    LogOut
+                </button>
+        </div>
+    </li>
+            </ul>
+        </div>
+        </div>
+    </nav>
+    
+    <!-- Button trigger modal -->
+    
+    
+    <!-- Modal -->
+    <div class="modal fade " id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered ">
+            <div class="modal-content ">
+                <div class="modal-header">
+                    <h1 class="modal-title text-center fs-5" id="staticBackdropLabel">Do You Want To Leave ?</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class=" border border-0  py-2">
+                    <a type="button" href="/logout" class="btn w-100 btn-outline-danger my-2">Yes</a>
+                    <button type="button" class="btn btn-outline-secondary w-100 " data-bs-dismiss="modal">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid ">
+        <div class="row mb-5">
+          <div class="col-lg-3 mt-4 mt-lg-0 col-12 ">
+            <div class="info">
+              <span class="w-100">Hello,</span>
+                <span class="w-100 fw-bold fs-6"><%= user.fullName %></span>
+            </div>
+            <div class="info">
+              <a class="text-decoration-none fw-bold text-black"
+              href="/userProfile/<%= user._id  %>">
+              <p>Dashboard</p>
+            </a>
+            </div>
+            <div class="info">
+              <a class="text-decoration-none text-black"
+              href="/shippingDetails/<%= cart.user._id %>">
+              <p>My Address</p>
+            </a> 
+            </div>
+            <div class="info">
+              <a class="text-decoration-none text-black"
+              href="/userOrders/<%= user._id %>">
+              <p>My Orders</p>
+            </a>
+            </div>
+            <div class="info">
+                <a class="text-decoration-none text-black"
+                href="/wallet/<%= user._id %>">
+                <p>My Wallet</p>
+              </a>
+              </div>
+            <div class="info ">
+            
+                <p type="button" class=" text-black " data-bs-toggle="modal"
+                data-bs-target="#staticBackdrop">
+                <svg width="20" height="20" class="" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#2874F0" stroke-width="0.3" stroke="#2874F0" d="M13 3h-2v10h2V3zm4.83 2.17l-1.42 1.42C17.99 7.86 19 9.81 19 12c0 3.87-3.13 7-7 7s-7-3.13-7-7c0-2.19 1.01-4.14 2.58-5.42L6.17 5.17C4.23 6.82 3 9.26 3 12c0 4.97 4.03 9 9 9s9-4.03 9-9c0-2.74-1.23-5.18-3.17-6.83z"></path></svg> Logout
+            </p>
+ 
+            </div>
+          </div>

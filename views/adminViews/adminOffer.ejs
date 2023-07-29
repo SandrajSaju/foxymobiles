@@ -1,0 +1,63 @@
+<%- include('../partials/adminHeader.ejs')%>
+
+    <body class="admin-body">
+        <%- include('../partials/adminNavbar.ejs') %>
+            <%- include('../partials/adminSidebar.ejs') %>
+
+            <div style=" border-radius: 10px; border: 3px solid rgb(166, 232, 161); margin-left: 10px; margin-right: 10px; padding-top: 35px;"
+            class="container">
+            <table class="container text-center" style="width: 100%;">
+                <tr>
+                    <th>No:</th>
+                    <th>Title</th>
+                    <th>Category</th>
+                    <th>Discount(%)</th>
+                    <th>End Date</th>
+                    <th>Availability</th>
+                    <th>Action</th>
+                </tr>
+
+                <% offers.forEach((offer,index)=>{ %>
+                    <tr>
+                        <td>
+                            <%= index+1 %>
+                        </td>
+                        <td>
+                            <strong class="text-success">
+                                <%= offer.offerTitle %>
+                            </strong>
+                        </td>
+                        <td>
+                            <% if (offer.category && offer.category.categoryName) { %>
+                                <strong class="text-success">
+                                    <%= offer.category.categoryName %>
+                                </strong>
+                                <% } %>
+                        </td>
+                        <td>
+                            <%= offer.offerDiscount  %>
+                        </td>
+                        <td>
+                            <%= offer.endDate.toLocaleDateString()  %>
+                        </td>
+                        <td>
+                            <strong>
+                                <%= offer.isAvailable %>
+                            </strong>
+                        </td>
+                        <td>
+                            <a href="/admin/deleteOffer/<%= offer._id %>">
+                                <button class="btn btn-danger mt-2">
+                                    Delete
+                                </button>
+                            </a>
+                        </td>
+                    </tr>
+                    <% }) %>
+            </table>
+            <br><br>
+            <button class="btn btn-outline-success"><a style="text-decoration: none; color: black;"
+                    href="/admin/offer/addOffer">+ add Offer</a></button>
+        </div>
+        </body>
+</html>

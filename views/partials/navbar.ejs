@@ -1,0 +1,42 @@
+<div id="page">
+    <nav class="colorlib-nav" role="navigation">
+        <div class="top-menu">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-7 col-md-9">
+                        <div id="colorlib-logo"><a href="/">Foxy Mobiles</a></div>
+                    </div>
+                    <div class="col-sm-5 col-md-3">
+                    <form action="/search" class="search-wrap">
+                       <div class="form-group">
+                          <input type="text" class="form-control search" placeholder="Search..." name="search">
+                          <button class="btn btn-primary submit-search text-center" type="submit"><i class="icon-search"></i></button>
+                       </div>
+                    </form>
+                 </div>
+             </div>
+                <div class="row">
+                    <div class="col-sm-12 text-left menu-1">
+                        <ul>
+                            <li class="active"><a href="/">Home</a></li>
+                            <li class="has-dropdown">
+                                <a href="#"><%= user.fullName %></a>
+                                <ul class="dropdown">
+                                    <li><a href="/userProfile/<%= user._id  %>">My Profile</a></li>
+                                    <li><a href="/shippingDetails/<%= cart.user._id %>">My Address</a></li>
+                                    <li><a href="/userOrders/<%= user._id  %>">My Order History</a></li>
+                                    <li><a href="/wallet/<%= user._id %>">My Wallet</a></li>
+                                    
+                                </ul>
+                            </li>
+                            <li><a href="/allProducts/<%= user._id %>">Shop</a></li>
+                            <li><a href="/about">About</a></li>
+                            <li><a href="/contact">Contact</a></li>
+                            <li class="cart"><a href="/shoppingCart/<%= cart._id %>"><i class="icon-shopping-cart"></i> Cart [<%= cart.products.length %>]</a></li>
+                            <li class="cart"><a href="/logOut">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
