@@ -85,7 +85,14 @@
 				<div class="row row-pb-md">
 					
 					<% if(products.length>0){ %>
-						<% products.forEach((item)=>{ %>
+						<% const productsPerPage=12 %>
+						<% var totalPages = Math.ceil(products.length / productsPerPage); %>
+						<% var currentPage = req.query.page ? parseInt(req.query.page) : 1; %>
+						<% currentPage=currentPage<1?1:currentPage %>
+                        <% currentPage=currentPage>totalPages?totalPages:currentPage %>
+						<% const startIndex = (currentPage - 1) * productsPerPage; %>
+						<% const displayedProducts = products.slice(startIndex, startIndex + productsPerPage); %>
+						<% displayedProducts.forEach((item)=>{ %>
 					<div class="col-lg-3 mb-4 text-center">
 						<div class="product-entry border">
 							<a href="/productDetails/<%= user._id %>/<%= item._id %>" class="prod-img">
@@ -102,7 +109,24 @@
 				</div>
 				<div class="row">
 					<div class="col-md-12 text-center">
-						<p><a href="/allProducts/<%= user._id %>" class="btn btn-primary btn-lg">Shop All Products</a></p>
+						<% // Add navigation links for previous and next pages %>
+						<% if (totalPages > 1) { %>
+							
+								<a href="?page=<%= currentPage - 1 %>" class="btn btn-primary btn-lg">Previous</a>
+							
+								<% for(let i=1;i<=totalPages;i++){ %>
+									<a href="?page=<%= i %>" class="btn btn-primary btn-lg"><%= i %></a>
+									<% } %>
+							
+								<a href="?page=<%= currentPage + 1 %>" class="btn btn-primary btn-lg">Next</a>
+							
+						<% } %>
+					</div>
+				</div>
+				<br>
+				<div class="row">
+					<div class="col-md-12 text-center">
+						<p><a href="/allProducts/<%= user._id %>" class="btn btn-success btn-lg">Shop All Products</a></p>
 					</div>
 				</div>
 			</div>

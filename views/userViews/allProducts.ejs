@@ -305,8 +305,18 @@
                     </div>
 
                     <div class="row isotope-grid">
-                        <% products.forEach((product)=>{%>
-                            <% %>
+                        <% const productsPerPage = 12; %>
+						<% // Calculate the total number of pages %>
+						<% var totalPages = Math.ceil(products.length / productsPerPage); %>
+						<% // Get the current page number from the query parameter %>
+						<% var currentPage = req.query.page ? parseInt(req.query.page) : 1; %>
+                        <% currentPage=currentPage<1?1:currentPage %>
+                        <% currentPage=currentPage>totalPages?totalPages:currentPage %>
+						<% // Calculate the index of the first product on the current page %>
+						<% const startIndex = (currentPage - 1) * productsPerPage; %>
+						<% // Slice the products array to get only the products for the current page %>
+						<% const displayedProducts = products.slice(startIndex, startIndex + productsPerPage); %>
+                        <% displayedProducts.forEach((product)=>{%>
                                 <div
                                     class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item">
                                     <!-- Block2 -->
@@ -372,6 +382,22 @@
                                     <% %>
 
                     </div>
+                    <div class="row">
+					<div class="col-md-12 text-center">
+						<% // Add navigation links for previous and next pages %>
+						<% if (totalPages > 1) { %>
+							
+								<a href="?page=<%= currentPage - 1 %>" class="btn btn-secondary btn-lg">Previous</a>
+                            
+                                <% for(let i=1;i<=totalPages;i++){ %>
+									<a href="?page=<%= i %>" class="btn btn-secondary btn-lg"><%= i %></a>
+									<% } %>
+
+								<a href="?page=<%= currentPage + 1 %>" class="btn btn-secondary btn-lg">Next</a>
+							
+						<% } %>
+					</div>
+				</div>
                 </div>
             </div>
 

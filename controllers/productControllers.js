@@ -18,7 +18,7 @@ const getAllProductsPage=async (req,res)=>{
         const offers=await Offer.find({isAvailable:true})
         const user=await User.findById(userId)
         const cart=await Cart.findOne({user:userId})
-        res.render("allProducts",{products,categories,user,cart,offers});
+        res.render("allProducts",{products,categories,user,cart,offers,req});
 
     }catch(err){
         console.log(err.message);

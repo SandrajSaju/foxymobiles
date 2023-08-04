@@ -31,7 +31,8 @@ const getGuestHome=async (req,res)=>{
     res.set("Cache-Control", "no-store")
     const banners=await Banner.find({isActive:true}).populate("category")
     const products=await Product.find({isAvailable:true})
-    res.render('guestHome',{products,banners})
+    // const currentPage = req.query.page ? parseInt(req.query.page) : 1;
+    res.render('guestHome',{products,banners,req})
 }
 
 const getOtpVerificationPage=(req,res)=>{
@@ -195,7 +196,7 @@ const getUserHome =async (req,res)=>{
     const categories=await Category.find({isDeleted:false})
 
     const cart=await Cart.findOne({user:user._id})
-    res.render("userHome",{user:user, products,cart,banners,categories})
+    res.render("userHome",{user:user, products,cart,banners,categories,req})
 }
 
 const userLogout=(req,res)=>{
