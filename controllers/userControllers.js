@@ -31,8 +31,13 @@ const getGuestHome=async (req,res)=>{
     res.set("Cache-Control", "no-store")
     const banners=await Banner.find({isActive:true}).populate("category")
     const products=await Product.find({isAvailable:true})
+    const productsPerPage = 8;
+    var totalPages = Math.ceil(products.length / productsPerPage);
+    var currentPage = req.query.page ? parseInt(req.query.page) : 1; 
+	currentPage=currentPage<1?1:currentPage 
+    currentPage=currentPage>totalPages?totalPages:currentPage
     // const currentPage = req.query.page ? parseInt(req.query.page) : 1;
-    res.render('guestHome',{products,banners,req})
+    res.render('guestHome',{products,banners,currentPage,totalPages,productsPerPage})
 }
 
 const getOtpVerificationPage=(req,res)=>{

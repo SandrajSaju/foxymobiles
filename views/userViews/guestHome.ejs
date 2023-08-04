@@ -116,14 +116,6 @@
 				<div class="row row-pb-md">
 		
 					<% if(products.length > 0){ %>
-						<% // Determine the number of products per page %>
-						<% const productsPerPage = 12; %>
-						<% // Calculate the total number of pages %>
-						<% var totalPages = Math.ceil(products.length / productsPerPage); %>
-						<% // Get the current page number from the query parameter %>
-						<% var currentPage = req.query.page ? parseInt(req.query.page) : 1; %>
-						<% currentPage=currentPage<1?1:currentPage %>
-                        <% currentPage=currentPage>totalPages?totalPages:currentPage %>
 						<% // Calculate the index of the first product on the current page %>
 						<% const startIndex = (currentPage - 1) * productsPerPage; %>
 						<% // Slice the products array to get only the products for the current page %>
