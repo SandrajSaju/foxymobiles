@@ -411,7 +411,18 @@
                                                         <td class="column-2">
                                                             <%= item.productName %>
                                                         </td>
-                                                        <td class="column-3">Rs:<%= item.product.price %>.00</td>
+
+                                                        <%if(item.product.offerPrice> 0){%>
+                                                            <td class="column-3 text-success">
+                                                                <strong>Rs:<%= item.product.offerPrice %>.00</strong>
+                                                            </td>
+                                                            <%}else{%>
+                                                                <td class="column-3">
+                                                                    Rs:<%= item.product.price %>.00
+                                                                </td>
+                                                                <%} %>
+
+
                                                         <td class="column-4">
                                                                     <div class="wrap-num-product flex-w m-l-auto m-r-0">
                                                                         <button
@@ -432,9 +443,21 @@
                                                                         </button>
                                                                     </div>
                                                                 </td>
-                                                        <td class="column-5">Rs:<strong>
-                                                                <%= item.product.price * item.quantity %>.00
-                                                            </strong></td>
+
+
+                                                                <%if(item.product.offerPrice> 0){%>
+                                                                    <td id="eachProductTotal"
+                                                                        class="column-5 text-success">
+                                                                        <strong>Rs:<%= item.product.offerPrice *
+                                                                                item.quantity %>.00</strong>
+                                                                    </td>
+                                                                    <%}else{%>
+                                                                        <td id="eachProductTotal" class="column-5">
+                                                                            <strong>Rs:<%= item.product.price *
+                                                                                    item.quantity %>.00</strong>
+                                                                        </td>
+                                                                        <%} %>
+
                                                         <td>
                                                             <a
                                                                 href="/deleteProductFromCart/<%= cart._id %>/<%= item.product._id %>">
@@ -839,6 +862,13 @@
                                                     var quantity = quantities[index];
                                                     var total = price * quantity;
                                                     $(this).find(".column-5 strong").text(`Rs:${total}.00`);
+                                                    // Update minus button style based on quantity
+                                                     var minusButton = $(this).find(".btn-num-product-down");
+                                                     if (quantity === 1) {
+                                                            minusButton.css({ opacity: 0.6, pointerEvents: "none" });
+                                                    } else {
+                                                            minusButton.css({ opacity: 1, pointerEvents: "auto" });
+                                                         }
                                                 });
 
                                                 // Update subtotal and total amounts

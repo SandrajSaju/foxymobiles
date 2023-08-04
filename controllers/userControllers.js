@@ -8,7 +8,9 @@ const Order=require("../models/orderModel")
 const Banner=require("../models/bannerModel")
 const Coupon=require("../models/couponModel")
 const Wallet=require("../models/walletModel")
+const Offer=require("../models/offerModel")
 const puppeteer = require('puppeteer');
+
 const ejs = require('ejs');
 const fs = require('fs');
 const path = require('path');
@@ -30,14 +32,18 @@ const getLoginPage=(req,res)=>{
 const getGuestHome=async (req,res)=>{
     res.set("Cache-Control", "no-store")
     const banners=await Banner.find({isActive:true}).populate("category")
-    const products=await Product.find({isAvailable:true})
+    const products=await Product.find({isAvailable:true}).populate('category')
     const productsPerPage = 8;
-    var totalPages = Math.ceil(products.length / productsPerPage);
-    var currentPage = req.query.page ? parseInt(req.query.page) : 1; 
+    const totalPages = Math.ceil(products.length / productsPerPage);
+    let currentPage = req.query.page ? parseInt(req.query.page) : 1; 
 	currentPage=currentPage<1?1:currentPage 
     currentPage=currentPage>totalPages?totalPages:currentPage
+    console.log(currentPage);
+    const offerData = await Offer.find();
+
+   
     // const currentPage = req.query.page ? parseInt(req.query.page) : 1;
-    res.render('guestHome',{products,banners,currentPage,totalPages,productsPerPage})
+    res.render('guestHome',{products,banners,currentPage,totalPages,productsPerPage,offers:offerData})
 }
 
 const getOtpVerificationPage=(req,res)=>{
@@ -199,9 +205,22 @@ const getUserHome =async (req,res)=>{
     const products=await Product.find({isAvailable:true})
     const banners=await Banner.find({isActive:true}).populate("category")
     const categories=await Category.find({isDeleted:false})
-
+    const offerData = await Offer.find();
+    if (offerData) {
+        for (const product of products) {
+          for (const offer of offerData) {
+            if (offer.isAvailable) {
+              if (offer.category.toString() === product.category._id.toString()) {
+                const categoryOfferPrice = Math.round(product.price - (product.price * (offer.offerDiscount / 100)));
+                product.offerPrice = categoryOfferPrice;
+                await product.save();
+              }
+            }
+          }
+        }
+      }
     const cart=await Cart.findOne({user:user._id})
-    res.render("userHome",{user:user, products,cart,banners,categories,req})
+    res.render("userHome",{user:user, products,cart,banners,categories,req,offers:offerData})
 }
 
 const userLogout=(req,res)=>{

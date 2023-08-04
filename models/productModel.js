@@ -33,7 +33,7 @@ const productSchema=new mongoose.Schema({
         type:Number,
         required:true
     },
-    offer:{
+    offerPrice:{
         type:Number
     },
     isAvailable:{

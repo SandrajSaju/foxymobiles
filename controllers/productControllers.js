@@ -44,8 +44,8 @@ const getProductsPage=async (req,res)=>{
     try{
         res.set("Cache-Control", "no-store")
         const products=await Product.find().populate("category")
-        console.log(products[0].category.categoryName);
-        console.log(products[1].category.categoryName);
+        // console.log(products[0].category.categoryName);
+        // console.log(products[1].category.categoryName);
         res.render('products',{products})
     }catch(err){
         console.log(err.message);

@@ -14,13 +14,14 @@ var moment = require("moment-timezone")
 
 const addProductToCart=async(req,res)=>{
     try{
+        res.set('Cache-Control', 'no-store');
         console.log("hello");
         const userId=req.params.user_id;
         const user=await User.findById(userId)
         const productId=req.params.product_id;
         let quantity=parseInt(req.body.numOfProducts)
         const product=await Product.findById(productId)
-        let cart=await Cart.findOne({user:userId})
+        let cart=await Cart.findOne({user:userId}).populate('products.product');
         const offer=await Offer.findOne({category:product.category._id})
 
         if(quantity<1){
@@ -30,14 +31,14 @@ const addProductToCart=async(req,res)=>{
             product:productId,
             productName:product.productName,
             quantity:quantity,
-            price: product.price * quantity 
+            price: offer ? product.offerPrice * quantity : product.price * quantity 
         }
 
         if(!cart){
             cart=new Cart({
                 user:userId,
                 products:[cartItem],
-                totalAmount:product.price*quantity
+                totalAmount:cartItem.price
             })
             await cart.save()
         }else{
@@ -59,7 +60,7 @@ const addProductToCart=async(req,res)=>{
         }
 
         cart.products.push(cartItem)
-        cart.totalAmount += product.price * quantity
+        cart.totalAmount += cartItem.price
         await cart.save()
         }
 
@@ -349,7 +350,7 @@ const updateCart = async (req, res) => {
         const userId = req.session.user_id
         const cartData = await Cart.findOne({ user: userId }).populate({
             path: "products.product",
-            select: "price product category totalStock"
+            select: "price product category totalStock offerPrice"
         })
         
         console.log(cartData.products)
@@ -357,14 +358,13 @@ const updateCart = async (req, res) => {
         const quantities = req.body.numOfproducts;
 
 
-
         cartData.products.forEach((item, index) => {
             item.quantity = quantities[index];
-            item.price = item.product.price * item.quantity
-        })
+            item.price = item.product.offerPrice > 0 ? item.product.offerPrice * item.quantity : item.product.price * item.quantity;
+          });
 
         const updatedTotalAmount = cartData.products.reduce(
-            (total, item) => total + item.product.price * item.quantity,
+            (total, item) => total + item.price,
             0
         );
 
