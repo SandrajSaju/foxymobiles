@@ -27,6 +27,16 @@ const addProductToCart=async(req,res)=>{
         if(quantity<1){
             return res.render("productDetails1", { message: "Quantity should not be zero", product,user,cart,offer})
         }
+        if(product.totalStock<1){
+            return res.render("productDetails1", { message: "This product is Out of Stock", product,user,cart,offer})
+        }
+        if(quantity>product.totalStock){
+            return res.render("productDetails1", { message: `Only ${product.totalStock} in stock`, product,user,cart,offer})
+        }
+        
+
+        
+
         let cartItem={
             product:productId,
             productName:product.productName,
@@ -44,16 +54,8 @@ const addProductToCart=async(req,res)=>{
         }else{
 
             const existingProduct = cart.products.find((item) =>
-            item.product.toString() === productId
+            item.product._id.toString() === product._id.toString()
         )
-
-        if(product.totalStock<1){
-            return res.render("productDetails1", { message: "This product is Out of Stock", product,user,cart,offer})
-        }
-        if(quantity>product.totalStock){
-            return res.render("productDetails1", { message: `Only ${product.totalStock} in stock`, product,user,cart,offer})
-        }
-        
 
         if (existingProduct) {
             return res.render("productDetails1", { message: "Product is Already in the Cart", product,user,cart,offer})
@@ -129,6 +131,7 @@ const deleteProductFromCart=async(req,res)=>{
 
 
 const cartCheckout=async (req,res)=>{
+    // res.render("loading")
     try {
         res.set("Cache-Control", "no-store")
         const userId = req.params.user_id
@@ -140,6 +143,7 @@ const cartCheckout=async (req,res)=>{
         const paymentMethod=req.body.paymentMethod
         console.log(paymentMethod);
         console.log("hi");
+        
         const addressIndex1=req.body.shippingAddress;
 
         if (cartData.products.length === 0) {
@@ -257,6 +261,7 @@ const cartCheckout=async (req,res)=>{
             }
             
         } else {
+            console.log("Razor_pay");
             if (!orderData) {
                 return res.render("shoppingCart", { message: "Please Enter a Shipping Address", user, cart: cartData, order:orderData ,coupons,wallet})
             }
